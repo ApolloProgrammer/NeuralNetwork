@@ -126,8 +126,9 @@ class NeuralNet:
                 self.whh_additionalLayers[position]=w_current
 
         # update the weights for the links between the input and hidden layers
-        hidden_errors = hidden_errors_list[-1]
-        hidden_outputs = hidden_outputs_list[0]
+        if self.iterations != 0:
+            hidden_errors = hidden_errors_list[-1]
+            hidden_outputs = hidden_outputs_list[0]
         self.wih += self.lr * numpy.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)),numpy.transpose(inputs_))
         self.bias_ih += self.lr * (hidden_errors * hidden_outputs * (1.0 - hidden_outputs))
 
